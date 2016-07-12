@@ -28,7 +28,17 @@ result
 result$cluster
 
 ##compare the resulting cluster to the actual classification (data1$quality):
-table(data1$quality, result$cluster)
+table1 <- table(data1$quality, result$cluster)
+
+##make an image out of table1
+library(gridExtra)
+
+tab <- qplot(1:10, 1:10, geom = "blank") + 
+  theme_bw() +
+  theme(line = element_blank(),
+        text = element_blank()) +
+  annotation_custom(grob = tableGrob(table1))
+tab
 
 
 ##plot the clusters using ggplot2
