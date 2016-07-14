@@ -53,25 +53,25 @@ train <- sample(index, round(nrow(data3)*.7))
 
 
 #REMOVE THE OTHER UNWANTED CATEGORIES AND RETAIN THE quality = 6
-data_train <- data3[train,-c(12:13,15:18)]
-data_test <- data3[-train,-c(12:18)]
+# data_train <- data3[train,-c(12:13,15:18)]
+# data_test <- data3[-train,-c(12:18)]
 
 ### === THIS PART IS THE TRAINING PROCESS USING THE SVM METHOD === ###
 ## THE PACKAGE USED HERE IS e1071
 
 
-svmmodel_3 <- svm(six ~ ., data = data_train)
+# svmmodel_3 <- svm(six ~ ., data = data_train)
 
-summary(svmmodel_3)
-print(svmmodel_3)
+# summary(svmmodel_3)
+# print(svmmodel_3)
 
 #TEST USING THE Train DATA
-pred3 <- predict(svmmodel_3, data_train)
+# pred3 <- predict(svmmodel_3, data_train)
 
 #CONVERT THE PROBABILITIES TO 1 OR 0
-pred3 <- ifelse(pred3>.5 ,1 ,0)
+# pred3 <- ifelse(pred3>.5 ,1 ,0)
 
-table(pred3, data_train$six)
+# table(pred3, data_train$six)
 
 ##DO THE CLASSIFICATION FOR ALL OTHER CATEGORIES
 
@@ -81,7 +81,7 @@ table(pred3, data_train$six)
 
 ###### === looping all categories === #####
 
-i=12 
+i=12
 for (i in c(12:18))
 {
   #REMOVE THE OTHER UNWANTED CATEGORIES AND RETAIN THE quality = 6
@@ -96,15 +96,18 @@ for (i in c(12:18))
   
   svmmodel <- svm(as.formula(paste(dep,"~.", sep="")) , data = data_train)
   
-  
   #TEST USING THE Train DATA
   pred <- predict(svmmodel, data_train)
   
+  
+  
   #CONVERT THE PROBABILITIES TO 1 OR 0
-  convert <- ifelse(pred>0.5 ,1 ,0)
+  predicted <- ifelse(pred>0.5 ,1 ,0)
   
-  #CREATE A CONFUSION TABLE TO SHOW THE ACCURACY OF THE MODEL
-  tab <- table(convert, data_train[,dep])
+  tab <- table(predicted, data_train[,dep])
+  
+  colnames(tab) <- c(0, dep)
+  
   print(tab)
-  
 }
+
