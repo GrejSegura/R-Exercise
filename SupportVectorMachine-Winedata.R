@@ -111,3 +111,29 @@ for (i in c(12:18))
   print(tab)
 }
 
+
+### === THE FOLLOWING IS THE CODE IF WE WISH TO PREDICT A CERTAIN DATA POINT ###
+################################################################################
+
+i=12
+for (i in c(12:18))
+{
+  #REMOVE THE OTHER UNWANTED CATEGORIES AND RETAIN THE quality = 6
+  data_train <- data3[train,c(1:11,i)]
+  data_test <- data3[-train,c(1:11)]
+  
+  # TO predict the last row of test data -- 
+  # YOU MAY ALSO CHANGE CREATE A VECTOR OF FEATURES
+  dat <- data_test[nrow(data_test),]
+
+  dep <- names(data3)[i]
+  
+  svmmodel <- svm(as.formula(paste(dep,"~.", sep="")) , data = data_train)
+  
+  pred2 <- predict(svmmodel, dat, type = "response")
+  
+  tab2 <- table(pred2,dep)
+  print(tab2)
+}
+
+##THAT'S IT!!! ###
