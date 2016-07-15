@@ -8,6 +8,8 @@ data1 <- read.csv(file.choose(), header = T, sep = ",")
 ##SINCE WE HAVE 7 DIFFERENT WINE QUALITIES, 
 ##THE CLASSIFIER NEEDS TO BE BROKEN DOWN INTO 7 DIFFERENT DUMMY VARIABLES
 
+## CONVERT THE CLASSIFYING VARIABLE TO FACTOR
+data1$quality <- factor(data1$quality)
 data_dummy <- model.matrix(~quality, data1)
 
 ##SINCE model.matrix DO NOT INCLUDE THE FIRST CATEGORY IN THE DUMMY VARIABLE CREATION,
