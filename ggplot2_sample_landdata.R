@@ -40,7 +40,7 @@ g1 <- g + geom_point(size = 3)
 ##add a smoother
 g2 <- g1 + geom_smooth(method = 'lm', 
                        formula = y ~ log(x), 
-                       color = 'gray30', 
+                       color = '#D12F19', 
                        se = FALSE)
 g2
 
@@ -53,7 +53,7 @@ statelist
 g3 <- g2 + geom_text_repel(aes(label = STATE), 
                            color = "gray20", 
                            data = subset(data1, STATE %in% statelist), 
-                           force = 2, size = 4) #size is to change the font size of the label
+                           force = 5, size = 4, family = 'Courier') #size is to change the font size of the label
 g3
 g4 <- g3 + scale_y_continuous(name = 'Structure Cost') + scale_x_continuous(name = 'Home Value')
 
@@ -74,6 +74,7 @@ g6 <- g5 + geom_text(size = 2)
 
 
 g6 <- g5 +  theme_minimal() + theme(text = element_text(color = "gray20"),
+                  plot.title = element_text(family = 'Courier', size = 15, face = "bold"),
                   legend.position = 'none',
                   axis.text = element_text(family = 'Courier'),
                   axis.title.x = element_text(family = 'Courier', vjust = -1, size = 15, face = 'bold'), # move title away from axis, size is the font size
