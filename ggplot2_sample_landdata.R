@@ -5,6 +5,10 @@ data <- read.csv(file.choose(), header = T, sep = ',')
 #load the necessary libraries
 library(ggplot2)
 library(dplyr)
+library(ggrepel)
+# to load the windows fonts to be used
+library(extrafont)
+windowsFonts(Courier=windowsFont("Courier New"))
 
 head(data)
 tail(data)
@@ -45,8 +49,7 @@ statelist <- data1$STATE[1:20]
 statelist
 
 #repel the labels
-install.packages('ggrepel')
-library(ggrepel)
+
 g3 <- g2 + geom_text_repel(aes(label = STATE), 
                            color = "gray20", 
                            data = subset(data1, STATE %in% statelist), 
@@ -68,11 +71,13 @@ colorvalue = c("#24576D", "#099DD7", "#28AADC", "#248E84", "#F2583F", "#96503F",
 g5 <- g4 + scale_color_manual(values = colorvalue) + ggtitle('Relationship Between Home Value and Structure Cost in the US')
 g6 <- g5 + geom_text(size = 2)
 
+
+
 g6 <- g5 +  theme_minimal() + theme(text = element_text(color = "gray20"),
                   legend.position = 'none',
-                  axis.text = element_text(face = "italic"),
-                  axis.title.x = element_text(family = 'Courier', vjust = -1, size = 15), # move title away from axis, size is the font size
-                  axis.title.y = element_text(family = 'Courier', vjust = 1, size = 15), # move away for axis, size is the font size
+                  axis.text = element_text(family = 'Courier'),
+                  axis.title.x = element_text(family = 'Courier', vjust = -1, size = 15, face = 'bold'), # move title away from axis, size is the font size
+                  axis.title.y = element_text(family = 'Courier', vjust = 1, size = 15, face = 'bold'), # move away for axis, size is the font size
                   axis.ticks.y = element_blank(), # element_blank() is how we remove elements
                   axis.line = element_line(color = "gray40", size = 0.5),
                   axis.line.y = element_blank(),
@@ -80,7 +85,3 @@ g6 <- g5 +  theme_minimal() + theme(text = element_text(color = "gray20"),
                   panel.grid.major.x = element_blank())
 g6
 
-install.packages('extrafont')
-library(extrafont)
-font_import()
-y
