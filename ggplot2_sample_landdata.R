@@ -83,9 +83,10 @@ g6 <- g5 +  theme_minimal() + theme(text = element_text(color = "gray20"),
                   axis.ticks.y = element_blank(), # element_blank() is how we remove elements
                   axis.line = element_line(color = "gray40", size = 0.5),
                   axis.line.y = element_blank(),
+                  panel.background = element_rect(fill = 'gray100', colour = 'gray100'),
+                  plot.background = element_rect(fill = 'gray100', colour = 'gray100'),
                   panel.grid.major = element_line(color = "gray50", size = 0.5),
-                  panel.grid.major.x = element_blank())
+                  panel.grid.major.x = element_blank(),
+                  panel.grid.minor.x = element_blank(),
+                  panel.grid.minor.y = element_blank())
 g6
-
-
-
