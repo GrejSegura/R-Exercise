@@ -30,6 +30,7 @@ list <- replace(list, list == "United Kingdom", "UK")
 
 data$country_of_destination_3 <- list
 
+
 head(data)
 
 #plot the chart
@@ -59,7 +60,7 @@ colorvalue = c("#5B0400", "#fb2e01", "#B38235", "#A61407", "#00515C", "#6fcb9f",
                "#00515C")
 
 
-g4 <- g3 + scale_color_manual(values = colorvalue) + ggtitle('GDP PER CAPITA VS UNEMPLOYMENT RATE \nOF THE TOP 20 DESTINATIONS OF THE OFWs\n')
+g4 <- g3 + scale_color_manual(values = colorvalue) + ggtitle('GDP PER CAPITA VS UNEMPLOYMENT RATE \nOF THE TOP DESTINATIONS OF THE OFWs\n')
 g4 <- g4 + labs(colour = "Region", size = "OFW Population\n in thousands")
 
 g5 <- g4 +  theme_minimal() + theme(text = element_text(color = "gray20"),
