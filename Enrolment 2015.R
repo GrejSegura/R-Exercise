@@ -8,7 +8,7 @@ library(ggrepel)
 
 # to load the windows fonts to be used
 library(extrafont)
-windowsFonts(Courier=windowsFont("Courier New"))
+windowsFonts(lucida = windowsFont("lucida grande"))
 
 
 #load the data from github
@@ -25,10 +25,10 @@ enrolmars
 
 #get the appropriate map using get_map()
 
-map <- get_stamenmap(center = c(126.153628, 7.332599), zoom = 12, maptype = 'terrain', crop = FALSE, size = c(640, 450))
+map <- get_googlemap(center = c(126.153628, 7.332599), zoom = 12, maptype = 'satellite', crop = FALSE, size = c(640, 450))
 m1 <- ggmap(map)
 m2 <- m1 + geom_point(aes(x = longitude, y = latitude, size = total, color = school_name), data = enrolmars, alpha = 0.8)
-m3 <- m2 + scale_size_area(max_size = 25)
+m3 <- m2 + scale_size_area(max_size = 35)
 m3
 
 
@@ -40,34 +40,27 @@ enrolmars$school_name
 
 m4 <- m3 + geom_label_repel(data = enrolmars,aes(x = longitude, y = latitude, label = school_name), 
                             
-
-                           force = 15, size = 3, fill = 'gray50', alpha = .5 ,family = 'Courier')
+                            
+                            segment.color = 'black', force = 15, size = 3, fill = 'gray50', alpha = .5 ,family = 'lucida')
 m4
-
-
-m5 <- m4 + scale_y_continuous(name = 'Latitude\n')
-m6 <- m5 + scale_x_continuous(name = '\nLongitude')
-m6
-
-
 #create different colors for every datapoints 
 colorvalue = c("#216c95", "#C0A468", "#D96534", "#D12F19",
                "#88DBA1", "#d08504")
 
-m6 <- m6 + scale_color_manual(values = colorvalue) + ggtitle('Comparative Size of Enrollees in \nMaragusan Public Secondary Schools\n for SY 2015\n')
+m6 <- m4 + scale_color_manual(values = colorvalue) + ggtitle('Comparative Size of Enrollees in \nMaragusan Public Secondary Schools\n for SY 2015\n')
 
 m7 <- m6 +  theme_minimal() + theme(text = element_text(color = "gray20"),
-                                    plot.title = element_text(family = 'Courier', size = 12, face = "bold", vjust = 5),
+                                    plot.title = element_text(family = 'lucida', size = 12, face = "bold", vjust = 5),
                                     plot.margin = unit(c(1,1,1,1), "cm"),
                                     legend.position = 'none',
-                                    axis.text = element_text(family = 'Courier'),
-                                    axis.title.x = element_text(family = 'Courier', vjust = -1, size = 12, face = 'bold'), # move title away from axis, size is the font size
-                                    axis.title.y = element_text(family = 'Courier', vjust = 1, size = 12, face = 'bold'), # move away for axis, size is the font size
+                                    axis.text = element_blank(),
+                                    axis.title.x = element_blank(),
+                                    axis.title.y = element_blank(),
                                     axis.ticks.y = element_blank(), # element_blank() is how we remove elements
-                                    axis.line = element_line(color = "gray40", size = 0.5),
+                                    axis.line = element_blank(),
                                     axis.line.y = element_blank(),
-                                    panel.grid.major = element_line(color = "gray50", size = 0.5),
+                                    panel.grid.major = element_blank(),
                                     panel.grid.major.x = element_blank())
 m7
-
+ggsave(filename = "marssecondary.png", plot = m7, dpi = 300, width = 11, height = 7)
 
