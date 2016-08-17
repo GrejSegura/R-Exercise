@@ -43,8 +43,8 @@ g1 <- ggplot(data, aes(x = gdp, y = unemp)) + geom_jitter(aes(size = X2012), alp
 g2 <- g1 + geom_text_repel(aes(label = country_of_destination_3), 
                            color = "gray10", 
                            data = subset(data, country_of_destination_3 %in% list), 
-                           segment.color = 'gray10',
-                           segment.size = .01,
+                           segment.color = 'gray20',
+                           segment.size = .35,
                            force = 10, 
                            size = 4, 
                            family = 'Courier')
@@ -83,3 +83,6 @@ g5 <- g4 +  theme_minimal() + theme(text = element_text(color = "gray20"),
                                     panel.grid.major = element_line(color = "gray50", size = 0.5),
                                     panel.grid.major.x = element_blank())
 g5
+ggsave(filename = "ofw.png", plot = g5, dpi = 1500, width = 11, height = 7)
+
+
