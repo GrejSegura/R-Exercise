@@ -1,6 +1,10 @@
 #This is an exercise for ggplot2 using the land data
 
-data <- read.csv(file.choose(), header = T, sep = ',')
+library(RCurl)
+
+urland <- getURL('https://raw.githubusercontent.com/GrejSegura/DataBank/master/landdata/landdata-states-2015q3.csv')
+
+data <- read.csv(text = urland)
 
 #load the necessary libraries
 library(ggplot2)
@@ -33,7 +37,7 @@ any(is.na(data))
 g <- ggplot(data1, 
             aes(x = HV, 
                 y = SC, 
-            color = STATE)) + geom_point(size = 9, shape = 1)
+                color = STATE)) + geom_point(size = 9, shape = 1)
 
 g1 <- g + geom_point(size = 7, alpha = .7)
 
@@ -53,7 +57,7 @@ statelist
 g3 <- g2 + geom_text_repel(aes(label = STATE), 
                            color = "gray10", 
                            data = subset(data1, STATE %in% statelist), 
-                           force = 5, size = 4, family = 'Courier') #size is to change the font size of the label
+                           segment.color = 'gray10', force = 5, size = 4, family = 'Courier') #size is to change the font size of the label
 g3
 g4 <- g3 + scale_y_continuous(name = 'Structure Cost\n') + scale_x_continuous(name = '\nHome Value\n')
 
@@ -74,19 +78,21 @@ g6 <- g5 + geom_text(size = 2)
 
 
 g6 <- g5 +  theme_minimal() + theme(text = element_text(color = "gray20"),
-                  plot.title = element_text(family = 'Courier', size = 15, face = "bold"),
-                  plot.margin = unit(c(.5,.5,.5,.5), "cm"),
-                  legend.position = 'none',
-                  axis.text = element_text(family = 'Courier'),
-                  axis.title.x = element_text(family = 'Courier', vjust = -1, size = 15, face = 'bold'), # move title away from axis, size is the font size
-                  axis.title.y = element_text(family = 'Courier', vjust = 1, size = 15, face = 'bold'), # move away for axis, size is the font size
-                  axis.ticks.y = element_blank(), # element_blank() is how we remove elements
-                  axis.line = element_line(color = "gray40", size = 0.5),
-                  axis.line.y = element_blank(),
-                  panel.background = element_rect(fill = 'gray100', colour = 'gray100'),
-                  plot.background = element_rect(fill = 'gray100', colour = 'gray100'),
-                  panel.grid.major = element_line(color = "gray50", size = 0.5),
-                  panel.grid.major.x = element_blank(),
-                  panel.grid.minor.x = element_blank(),
-                  panel.grid.minor.y = element_blank())
+                                    plot.title = element_text(family = 'Courier', size = 15, face = "bold"),
+                                    plot.margin = unit(c(.5,.5,.5,.5), "cm"),
+                                    legend.position = 'none',
+                                    axis.text = element_text(family = 'Courier', color = 'gray20'),
+                                    axis.title.x = element_text(family = 'Courier', vjust = -1, size = 15, face = 'bold'), # move title away from axis, size is the font size
+                                    axis.title.y = element_text(family = 'Courier', vjust = 1, size = 15, face = 'bold'), # move away for axis, size is the font size
+                                    axis.ticks.y = element_blank(), # element_blank() is how we remove elements
+                                    axis.line = element_line(color = "gray40", size = 0.5),
+                                    axis.line.y = element_blank(),
+                                    panel.background = element_rect(fill = 'gray95', colour = 'gray95'),
+                                    plot.background = element_rect(fill = 'gray95', colour = 'gray95'),
+                                    panel.grid.major = element_line(color = "gray50", size = 0.5),
+                                    panel.grid.major.x = element_blank(),
+                                    panel.grid.minor.x = element_blank(),
+                                    panel.grid.minor.y = element_blank())
 g6
+
+ggsave(filename = "USLand.png", plot = g6, dpi = 1500, width = 11, height = 7)
