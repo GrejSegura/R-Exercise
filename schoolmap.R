@@ -1,7 +1,7 @@
 
-map2 <- get_googlemap(location = 'Davao City', maptype = 'terrain')
-a1 <- ggmap(map2)
-a1library(RCurl)
+##plotting the locations of elementary schools in the Philippines
+
+library(RCurl)
 library(ggplot2)
 library(dplyr)
 library(ggrepel)
