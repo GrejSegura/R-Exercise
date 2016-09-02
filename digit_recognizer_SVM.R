@@ -65,10 +65,10 @@ for (i in 1:10) {
   pred2 <- ifelse(pred1 > 0.5 , 1, 0)
   
   #calculate the error
-  totalerror <- test[,1] - pred2
+  totalerror <- ifelse(test[,1] == pred2, 0, 1)
   
   #compute the model accuracy
-  err <-  sum(totalerror)/ sum(as.numeric(test[,1]))
+  err <-  sum(totalerror)/ nrow(test[,1])
   error[i] <- err
   
 }
