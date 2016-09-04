@@ -144,3 +144,12 @@ predictsvm <- function(x){
  probability_table <- cbind(label_target, prob_gather)
  probability_table
 }
+
+##########
+#PERFORM A TEST
+
+test <- digit[-index,]
+x <- test[1,-1]
+
+predictsvm(x)
+test
