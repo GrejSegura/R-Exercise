@@ -128,6 +128,7 @@ predictsvm <- function(x){
  label_target <- c(0:9)
  
  #loop the training
+ i = 1
  for (i in 1:10) {
   
   f2 <- as.formula(paste(columns[i],'~.', sep = ''))
