@@ -133,7 +133,7 @@ predictsvm <- function(x){
   
   f2 <- as.formula(paste(columns[i],'~.', sep = ''))
 
-  finalsvm <- svm(f2, data = train, gamma = bestgamma[i], cost = bestcost[i]))
+  finalsvm <- svm(f2, data = train, gamma = bestgamma[i], cost = bestcost[i])
 
   #predict
   predicted <- predict(finalsvm, x)
