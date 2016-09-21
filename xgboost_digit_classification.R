@@ -14,7 +14,7 @@ digit_data <- sapply(digit_data, as.numeric)
 digit_data <- as.data.frame(digit_data)
 
 str(digit_data)
-
+length(digit_data)
 #create training and test data
 d <- 1:nrow(digit_data)
 index_digit <- sample(d, round(nrow(digit_data)*.8))
@@ -110,3 +110,89 @@ xgdigit_train <- xgb.cv(param = param, data = as.matrix(train_1), label = train_
                    nfold = 5, nrounds = 120)
 
 min(xgdigit_train$test.mlogloss.mean)
+
+
+#-------------------------------------#
+#-------------------------------------#
+#create a function to visualize the number ---> visualizer function
+
+digit_visual <- function(x){
+  
+  #create NULL vectors
+  
+  image_raw <- data.frame(matrix(ncol = 28, nrow = 28))
+  
+  i = 0
+  for (i in 0:27){
+    
+    image_raw[28 - i,] <- x[(1:28) + (i*28)]
+    
+  }
+  
+  heatmap(as.matrix((image_raw)), Rowv=NA, Colv=NA, col = heat.colors(256),  
+          symm = FALSE, margins=c(5,10), labRow = FALSE, labCol = FALSE)
+  
+}
+
+# -------------------#
+
+# TEST THE VISUALIZER
+#create a matrix to visualize a sample row ---> pick a row in the train or test
+
+number <- as.vector(as.matrix(test_1[18,]))
+
+test_2[18]
+
+digit_visual(number)
+
+
+View(image_raw)
+#---------------------------------------#
+# PLAY TIME!!!! PLAY TIME!!! PLAY TIME!!!
+# GUESS THE NUMBER AND VISUALIZE
+# THIS JUST A TESTING CODE -- MORE LIKE A GAME TO ME
+
+#create a function for guessing -----> RUN THIS FUNCTION FIRST BEFORE GUESSING NUMBERS
+
+try_luck <- function(x, y){
+  
+  result <- predict(xgtree_digit, as.matrix(x))
+  
+  #check if the number is correctly guessed
+  
+  if(y == result){
+    
+    say <- paste('CORRECTLY GUESSED NUMBER ', result, ', CHECK THE IMAGE TO CONFIRM.', sep = '')
+    print(say)
+    
+  } else {
+    
+    say <- paste('OOPS! CORRECT GUESS WOULD BE ', result, '.', sep = '')
+    print(say)  
+  }
+  
+}
+
+# -----------------------#
+# CREATE ANOTHER FUNCTION FOR TRY GUESSING NUMBERS
+
+guess <- function(x){
+  
+  num <- test_1[row,]
+  
+  # assign the correct number
+  real <- test_2[row]
+  
+  # result of the model
+  try_luck(num, real)
+  digit_visual(num)
+  
+}
+
+# OK, LET'S TRY THIS ONE -- GAME TIME!!!
+#
+# pick a row in test_2, only 1-1300 allowed ----> assign it to i
+
+row = 1300
+
+guess(row)
