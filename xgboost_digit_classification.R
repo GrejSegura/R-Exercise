@@ -191,8 +191,9 @@ guess <- function(x){
 
 # OK, LET'S TRY THIS ONE -- GAME TIME!!!
 #
-# pick a row in test_2, only 1-1300 allowed ----> assign it to i
+# pick a row in test_2, only 1-1300 allowed ----> assign it to row variable below
 
 row = 1300
 
+# let the model guess
 guess(row)
