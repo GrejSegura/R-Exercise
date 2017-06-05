@@ -1,11 +1,11 @@
 library(MSwM)
 data <- read.csv(file.choose(), header = TRUE, sep = ",")
 lwap <- as.ts(data$V1)
-markovmod <- lm(lwap~1, data)
+markovmod <- lm(lwap ~ 1, data)
 summary(markovmod)
 
-markov <- msmFit(markovmod, k = 2, sw = c(T,T,T,T,T), p = 3, 
-              control=list(trace = TRUE, maxiter = 200, tol = 10e-8, maxiterOuter = 25, maxiterInner = 50))
+markov <- msmFit(markovmod, k = 2, sw = c(TRUE, TRUE, TRUE, TRUE, TRUE), p = 3, 
+              control = list(trace = TRUE, maxiter = 200, tol = 10e-8, maxiterOuter = 25, maxiterInner = 50))
 
 summary(markov)
 #to get the filtered probabilities
@@ -17,7 +17,7 @@ stop
 #RESULT
 Markov Switching Model
 
-Call: msmFit(object = markovmod, k = 2, sw = c(T, T, T, T, T), p = 3, 
+Call: msmFit(object = markovmod, k = 2, sw = c(TRUE, TRUE, TRUE, TRUE, TRUE), p = 3, 
              control = list(trace = TRUE, maxiter = 200, tol = 1e-07, 
                             maxiterOuter = 25, maxiterInner = 50))
 
