@@ -7,10 +7,7 @@
 
 
 library(tidyverse)
-library(stringr)
-library(dplyr)
 library(data.table)
-library(plyr)
 
 
 ## LOAD THE DBMS DATA
@@ -317,3 +314,4 @@ db <- db[, c("id", "attended")]
 ingoDataFinal <- merge(ingoData, db, by = "id", all.x = TRUE)
 
 write.csv(ingoDataFinal ,"./dta/Ingo_Matching_Final.csv", row.names = FALSE)
+rm(list = ls())
