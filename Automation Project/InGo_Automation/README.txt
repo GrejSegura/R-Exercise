@@ -21,7 +21,7 @@ THIS IS THE INSTRUCTION TO EXECUTE THE TASK FOR INGO AUTOMATION
 
 2. save the data as follows: acquisitions.csv , advocates.csv, and dbms.csv
 
-3. Run the execute_task.R file
+3. Run the execute_ingo_task.R file
 	NOTE: make sure to install.packages the following in R before running.
 		tidyverse, data.table
 
