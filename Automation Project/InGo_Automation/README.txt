@@ -21,8 +21,8 @@ THIS IS THE INSTRUCTION TO EXECUTE THE TASK FOR INGO AUTOMATION
 
 2. save the data as follows: acquisitions.csv , advocates.csv, and dbms.csv
 
-3. Run the execute_ingo_task.R file
+3. Clickthe Ingo Report Generate file
 	NOTE: make sure to install.packages the following in R before running.
 		tidyverse, data.table
 
-4. Output is saved as Ingo_Matching_Final.csv in the /dta folder.
+4. Output is saved as ingo_matching_final.csv in the /dta folder.
