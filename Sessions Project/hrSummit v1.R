@@ -1,14 +1,6 @@
 
 rm(list = ls())
 library(tidyverse)
-library(data.table)
-library(dplyr)
-library(stringr)
-library(lubridate)
-library(magrittr)
-library(DT)
-
-
 
 file_names1 <- list.files(path = 'C:/Users/Grejell/Documents/Data Analysis/Automation Project/HR Summit Sessions/Day1/', pattern = ".TXT", full.names = TRUE)
 file_names2 <- list.files(path = 'C:/Users/Grejell/Documents/Data Analysis/Automation Project/HR Summit Sessions/Day2/', pattern = ".TXT", full.names = TRUE)
